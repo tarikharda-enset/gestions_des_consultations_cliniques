@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Consultation</title>
+</head>
+<body>
+<h1>Formulaire Consultation</h1>
+
+<form th:action="@{/consultations/save}" th:object="${consultation}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <div>
+        <label>Date de consultation:</label>
+        <input type="date" th:field="*{dateConsultation}" />
+        <span th:if="${#fields.hasErrors('dateConsultation')}" th:errors="*{dateConsultation}"></span>
+    </div>
+
+    <div>
+        <label>Motif:</label>
+        <input type="text" th:field="*{motif}" />
+        <span th:if="${#fields.hasErrors('motif')}" th:errors="*{motif}"></span>
+    </div>
+
+    <div>
+        <label>Diagnostic:</label>
+        <input type="text" th:field="*{diagnostic}" />
+        <span th:if="${#fields.hasErrors('diagnostic')}" th:errors="*{diagnostic}"></span>
+    </div>
+
+    <div>
+        <label>Patient:</label>
+        <select th:field="*{patient.id}">
+            <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.nom + ' ' + p.prenom}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('patient')}" th:errors="*{patient}"></span>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<br>
+<a th:href="@{/consultations}">Retour à la liste</a>
+</body>
+</html>

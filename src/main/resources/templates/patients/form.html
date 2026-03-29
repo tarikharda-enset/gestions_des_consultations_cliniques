@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patient</title>
+</head>
+<body>
+<h1>Formulaire patient</h1>
+
+<form th:action="@{/patients/save}" th:object="${patient}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div>
+        <label>Nom</label>
+        <input type="text" th:field="*{nom}">
+        <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+    </div>
+
+    <div>
+        <label>Prénom</label>
+        <input type="text" th:field="*{prenom}">
+        <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+    </div>
+
+    <div>
+        <label>Téléphone</label>
+        <input type="text" th:field="*{telephone}">
+        <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<br>
+<a th:href="@{/patients}">Retour</a>
+</body>
+</html>
